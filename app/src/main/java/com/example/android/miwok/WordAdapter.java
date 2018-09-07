@@ -86,6 +86,12 @@ public class WordAdapter<W> extends ArrayAdapter<Word> {
             iconView.setVisibility(View.GONE);
 
             // Modifica as margens do layout da activity Phrases
+            /**
+             * Uma forma mais limpa e rápida de resolver a questão é acrescentar
+             * a linha [android:drawSelectorOnTop="true"] no código do ListView (word_list)
+             * Pode-se, também, acrescentar o atributo "?android:attr/selectableItemBackground"
+             * ao background o RelativeLayout.
+             */
             ViewGroup.LayoutParams lp = textBox.getLayoutParams();
                 if (lp instanceof ViewGroup.MarginLayoutParams){
                     ViewGroup.MarginLayoutParams mpl = (ViewGroup.MarginLayoutParams) lp;
