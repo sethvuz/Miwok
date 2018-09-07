@@ -71,21 +71,28 @@ public class WordAdapter<W> extends ArrayAdapter<Word> {
         TextView wordMiwok = (TextView) listItemView.findViewById(R.id.miwok_word);
         wordMiwok.setText(currentWord.getMiwokTranslation());
 
+        //MediaPlayer mediaPlayer = MediaPlayer.create(context, currentWord.getSoundId());
+        View textBox = listItemView.findViewById(R.id.text_container);
+        int color = ContextCompat.getColor(getContext(), textBackgroundColor);
+        textBox.setBackgroundColor(color);
 
-            // Find the ImageView in the list_item.xml layout with the ID image
-            ImageView iconView = (ImageView) listItemView.findViewById(R.id.image);
+        // Find the ImageView in the list_item.xml layout with the ID image
+        ImageView iconView = (ImageView) listItemView.findViewById(R.id.image);
         if (currentWord.temImagem()) {
             // Get the image resource ID from the current Word object and
             // set the image to iconView
             iconView.setImageResource(currentWord.getImageResourceId());
         } else {
             iconView.setVisibility(View.GONE);
-        }
 
-        //MediaPlayer mediaPlayer = MediaPlayer.create(context, currentWord.getSoundId());
-        View textBox = listItemView.findViewById(R.id.text_container);
-        int color = ContextCompat.getColor(getContext(), textBackgroundColor);
-        textBox.setBackgroundColor(color);
+            // Modifica as margens do layout da activity Phrases
+            ViewGroup.LayoutParams lp = textBox.getLayoutParams();
+                if (lp instanceof ViewGroup.MarginLayoutParams){
+                    ViewGroup.MarginLayoutParams mpl = (ViewGroup.MarginLayoutParams) lp;
+                    ((ViewGroup.MarginLayoutParams) lp).leftMargin = 0;
+                    textBox.requestLayout();
+            }
+        }
 
         return listItemView;
     }
