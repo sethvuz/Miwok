@@ -19,6 +19,8 @@ public class Numbers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
 
+       // getActionBar().setDisplayHomeAsUpEnabled(true);
+
        final ArrayList<Word> words = new ArrayList<>();
 
         words.add(new Word ("um", "lutti", R.drawable.number_one, R.raw.number_one));
