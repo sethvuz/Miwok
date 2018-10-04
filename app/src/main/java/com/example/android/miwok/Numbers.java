@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 public class Numbers extends AppCompatActivity {
 
-    MediaPlayer player;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,11 +75,5 @@ public class Numbers extends AppCompatActivity {
         releasePlayer();
     }
 
-    //Função para a liberação de recurso da variável player
-    private void releasePlayer(){
-        if (player != null){
-            player.release();
-            player = null;
-        }
-    }
+
 }
