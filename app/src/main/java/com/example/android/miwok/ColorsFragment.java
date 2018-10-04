@@ -1,22 +1,34 @@
 package com.example.android.miwok;
 
+
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Colors extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ColorsFragment extends Fragment {
 
-    MediaPlayer player;
+    private MediaPlayer player;
+
+    public ColorsFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.word_list, container, false);
 
         final ArrayList<Word> words = new ArrayList<>();
 
@@ -29,14 +41,14 @@ public class Colors extends AppCompatActivity {
         words.add(new Word ("bege", "chiwiiṭә", R.drawable.color_dusty_yellow, R.raw.color_mustard_yellow));
         words.add(new Word ("amarelo", "topiise", R.drawable.color_mustard_yellow,R.raw.color_dusty_yellow));
 
-        WordAdapter<Word> itemsAdapter = new WordAdapter<Word>(this, R.layout.list_item, words, R.color.category_colors);
-        ListView listView = (ListView) findViewById(R.id.list);
+        WordAdapter<Word> itemsAdapter = new WordAdapter<Word>(getActivity(), R.layout.list_item, words, R.color.category_colors);
+        ListView listView = (ListView) rootView.findViewById(R.id.list);
         listView.setAdapter(itemsAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                player = MediaPlayer.create(Colors.this, words.get(position).getSoundId());
+                player = MediaPlayer.create(getActivity(), words.get(position).getSoundId());
                 player.start();
                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
@@ -46,10 +58,12 @@ public class Colors extends AppCompatActivity {
                 });
             }
         });
+
+        return rootView;
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         releasePlayer();
     }
@@ -60,4 +74,5 @@ public class Colors extends AppCompatActivity {
             player = null;
         }
     }
+
 }
